@@ -1,21 +1,21 @@
 package javastart.model;
 
-import javastart.io.DataReader;
-
 public class Library {
-  public static void main( String args[ ] ) {
-    final String appName = "Library v0.9";
+  private final int maxBooks = 1000;
+  private Book[ ] books = new Book[ maxBooks ];
+  private int booksNumber = 0;
 
-    Book[ ] books = new Book[ 1000 ];
-    DataReader dataReader = new DataReader( );
+  public void addBook( Book book ) {
+    if ( booksNumber < maxBooks) {
+      books[ booksNumber ] = book;
+      booksNumber++;
+     } else {
+      System.out.println( "\nThe library is full.\n" );
+     }
+  }
 
-    System.out.println( appName );
-    System.out.println( "Enter a new book" );
-
-    books[ 0 ] = dataReader.readCreateBook();
-
-    books[ 0 ].printInfo( );
-    System.out.println( "The system can hold up to " + books.length + " books." );
-    dataReader.close( );    
+  public void printBooks( ) {
+    if ( booksNumber == 0 ) { System.out.println( "\nThe library is empty.\n" ); }
+    for ( int i = 0; i < booksNumber; i++ ) { books[ i ].printInfo( ); }
   }
 }
